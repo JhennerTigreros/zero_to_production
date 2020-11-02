@@ -1,4 +1,4 @@
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JhennerTigreros/zero_to_production/blob/master/00/model.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://github.com/JhennerTigreros/zero_to_production/blob/master/model.ipynb)
 
 # Configuración
 
