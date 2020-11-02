@@ -1,0 +1,7 @@
+docopt
+matplotlib
+pathlib
+pip-chill
+tensorflow
+yarg
+google-api-python-client
