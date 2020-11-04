@@ -13,7 +13,7 @@ args = argparse.ArgumentParser(
 
 args.add_argument("--project-id", dest='project_id', type=str, required=True)
 args.add_argument("--img-path", dest='img_path', type=str, required=True)
-args.add_argument("--region", dest='region', type=str, required=True)
+args.add_argument("--region", dest='region', type=str)
 args.add_argument("--model", dest='model', type=str, required=True)
 args.add_argument("--version", dest='version', type=str, required=True)
 args.add_argument("--class-names", nargs='+', dest='class_names', required=True)
