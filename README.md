@@ -47,4 +47,4 @@ Para probar el modelo entrenado y desplegado en AI platform utilizaremos el scri
 
 Para ejecutar el script sería algo así:
 
-    python main.py --project-id tf_meetup_colombia --img-path ./img/prueba.jpg --model tf_meetup --version v1 --class-names daisy dandelion roses sunflowers tulips
+    python main.py --project-id <PROJECT_NAME> --img-path ./img/prueba.jpg --model <MODEL_NAME> --version v1 --class-names daisy dandelion roses sunflowers tulips
