@@ -8,13 +8,13 @@ Primeramente descargaremos la herramienta de linea de comandos para el manejo de
 
 Seguidamente debemos crear un proyecto en GCP para poder crear los recursos necesarios para desplegar nuestro modelo, para realizar esto debemos seguir la guia oficial de Google Cloud para crear proyectos [click aqui](https://cloud.google.com/resource-manager/docs/creating-managing-projects#gcloud). La manera más sencilla es con la herramienta de la linea de comandos ejecutando el comando:
 
-    gcloud projects create tf_meetup_colombia
+    gcloud projects create <PROJECT_NAME>
 
 ## Creación de bucket de almacenamiento
 
 Para crear recursos de GCP mediante la interfaz de linea de comandos debemos instalar la herramienta gsutil, para esto es recomendable seguir el tutorial oficial de Google cloud [click aqui](https://cloud.google.com/storage/docs/gsutil_install). La manera de crear un bucket de almacenamiento debemos ejecutar el comando:
 
-    gsutil mb gs://modelos
+    gsutil mb gs://<MODEL_ROOT_DIR
 
 ## Creación del modelo en AI Platform
 
@@ -28,11 +28,11 @@ Esto creara nuestro modelo en AI Platform.
 
 Para desplegar nuestra versión del modelo de DL entrenado y guardado en el formato SavedModel, y ya con el modelo creado en AI Platform, para esto debemos primeramente subir nuestor modelo a GCP en un bucket de almacenamiento, ejecutando el siguiente comando:
 
-    gsutil cp -r flowers/1 gs://modelos
+    gsutil cp -r flowers/1 gs://<MODEL_DIR>
 
 Con el modelo entrenado ya en GCS (Google Cloud Storage), procederemos a desplegar una versión dentro de nuestro modelo, esto para realizar las pruebas y poder utilizar nuestro modelo en diferentes formas, tanto API, librerías de lenguaje de programación o la interfaz de linea de comandos de GCP, para desplegar una nueva versión de nuestro modelo ejecutaremos el siguiente comando:
 
-    gcloud ai-platform versions create v1 --model=tf_meetup --accelerator=type=nvidia-tesla-t4,count=1 --framework=tensorflow --machine-type=n1-standard-4 --origin=gs://modelos/flowers/1/ --python-version=3.7 --region=us-central1 --runtime-version=2.2
+    gcloud ai-platform versions create v1 --model=<MODEL_NAME> --accelerator=count=1,type=nvidia-tesla-t4 --framework=tensorflow --machine-type=n1-standard-4 --origin=gs://<MODEL_DIR> --python-version=3.7 --runtime-version=2.2
 
 # Probar Modelo
 
