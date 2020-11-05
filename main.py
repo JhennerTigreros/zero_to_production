@@ -50,7 +50,7 @@ data = np.asarray(img, dtype = 'int32')
 data = np.expand_dims(data, axis = 0)
 
 class_names = args.class_names
-for i in range(1, 100):
+for i in range(1, 1000):
     scores = predict_json(args.project_id, args.region, args.model, data.tolist(), args.version)
     print(scores)
     print(class_names[np.argmax(scores)])
