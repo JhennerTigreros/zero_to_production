@@ -1,5 +1,7 @@
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JhennerTigreros/zero_to_production/blob/master/model.ipynb)
 
+Nota: Este repositorio hace parte de la charla dada en el grupo de Tensorflow Colombia en su sesion numero cuatro, puedes ver el fragmento [aqui](https://youtu.be/4knmKJoanyY?t=1983)
+
 # Configuración
 
 Primeramente descargaremos la herramienta de linea de comandos para el manejo de recursos la manera más facil de instalar esta herramienta es seguir el tutorial oficial de Google Cloud [click aqui](https://cloud.google.com/sdk/docs/install)
