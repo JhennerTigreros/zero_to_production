@@ -1,0 +1,85 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tensorflow-service-api
+spec:
+  ports:
+    - port: 8500
+      targetPort: 8500
+      name: "grpc"
+    - port: 8501
+      targetPort: 8501
+      name: "rest"
+  selector:
+    k8s-app: tensorflow-api
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tensorflow-api
+spec:
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      k8s-app: tensorflow-api
+  template:
+    metadata:
+      labels:
+        k8s-app: tensorflow-api
+    spec:
+      terminationGracePeriodSeconds: 60
+      containers:
+        - name: tensorflow-container
+          image: tensorflow/serving_local
+          args:
+            - "--model_name=flowers"
+            - "--model_base_path=/models/flowers"
+          ports:
+            - containerPort: 8500
+            - containerPort: 8501
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: "100m"
+              memory: 500Mi
+            limits:
+              cpu: "1"
+              memory: 700Mi
+          readinessProbe:
+            httpGet:
+              path: /v1/models/flowers/versions/1
+              port: 8501
+            initialDelaySeconds: 20
+            periodSeconds: 30
+            timeoutSeconds: 10
+            failureThreshold: 3
+            successThreshold: 1
+          livenessProbe:
+            httpGet:
+              path: /v1/models/flowers/versions/1
+              port: 8501
+            initialDelaySeconds: 60
+            periodSeconds: 30
+            timeoutSeconds: 10
+            failureThreshold: 3
+            successThreshold: 1
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: tensorflow-server-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: tensorflow-api
+  minReplicas: 1
+  maxReplicas: 2
+  targetCPUUtilizationPercentage: 60
+---

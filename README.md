@@ -49,4 +49,6 @@ Para probar el modelo entrenado y desplegado en AI platform utilizaremos el scri
 
 Para ejecutar el script sería algo así:
 
-    python main.py --project-id <PROJECT_NAME> --img-path ./img/prueba.jpg --model <MODEL_NAME> --version v1 --class-names daisy dandelion roses sunflowers tulips
+    python main_google.py --project-id <PROJECT_ID> --img-path ./img/prueba.jpg --model <MODEL_NAME> --version v1 --class-names daisy dandelion roses sunflowers tulips --region us-central1
+
+    python main_k8s.py --img-path ./img/prueba.jpg --model flowers --version 1 --class-names daisy dandelion roses sunflowers tulips
